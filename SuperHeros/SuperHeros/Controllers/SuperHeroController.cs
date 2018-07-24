@@ -64,9 +64,10 @@ namespace SuperHeros.Controllers
         public ActionResult Delete(string name)
         {
             var deletedHero = db.SuperHeros.Where(s => s.Name == name).Single();
-            db.SuperHeros.Remove(deletedHero);
-            db.SaveChanges();
-            return RedirectToAction("Details");
+            return View(deletedHero);
+            //db.SuperHeros.Remove(deletedHero);
+            //db.SaveChanges();
+            //return RedirectToAction("Details");
         }
     }
 }
