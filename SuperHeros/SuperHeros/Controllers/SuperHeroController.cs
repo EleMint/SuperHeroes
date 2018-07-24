@@ -36,7 +36,7 @@ namespace SuperHeros.Controllers
         }
         public ActionResult Details()
         {
-            return View();
+            return View(db.SuperHeros.ToList());
         }
         public ActionResult Edit()
         {
@@ -46,24 +46,27 @@ namespace SuperHeros.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Models.SuperHeros superHero)
         {
-            if(ModelState.IsValid)
-            {
-                var hero = db.SuperHeros.Where(s => s.Id == superHero.Id).Single();
-                hero.Name = superHero.Name;
-                hero.AlterEgo = superHero.AlterEgo;
-                hero.PrimaryAbility = superHero.PrimaryAbility;
-                hero.SecondaryAbility = superHero.SecondaryAbility;
-                hero.CatchPhrase = superHero.CatchPhrase;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Id = new SelectList(db.SuperHeros, "Id", "Name", superHero.Id);
-            return View(superHero);
+            var hero = db.SuperHeros.Where(s => s.Id == superHero.Id).Single();
+            hero.Name = superHero.Name;
+            hero.AlterEgo = superHero.AlterEgo;
+            hero.PrimaryAbility = superHero.PrimaryAbility;
+            hero.SecondaryAbility = superHero.SecondaryAbility;
+            hero.CatchPhrase = superHero.CatchPhrase;
+            db.SaveChanges();
+            return RedirectToAction("Details");
         }
         public ActionResult Delete()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(string name)
+        {
+            var deletedHero = db.SuperHeros.Where(s => s.Name == name).Single();
+            db.SuperHeros.Remove(deletedHero);
+            db.SaveChanges();
+            return RedirectToAction("Details");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model SuperHeros.Models.SuperHeros
+﻿@model IEnumerable<SuperHeros.Models.SuperHeros>
 
 @{
     ViewBag.Title = "Details";
@@ -9,55 +9,59 @@
 <div>
     <h4>SuperHeros</h4>
     <hr />
-    @foreach(var superhero in Model)
+    @foreach (var superhero in Model)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => superhero.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AlterEgo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => superhero.AlterEgo)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PrimaryAbility)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => superhero.PrimaryAbility)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.SecondaryAbility)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => superhero.SecondaryAbility)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CatchPhrase)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => superhero.CatchPhrase)
+            </dd>
+
+        </dl>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { name = superhero.Name }) |
+            @Html.ActionLink("Delete", "Delete", new { name = superhero.Name})
+        </p>
+    }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit") |
-    @Html.ActionLink("Back to List", "Index")
-</p>
 
 
 
 
-<dl class="dl-horizontal">
-    <dt>
-        @Html.DisplayNameFor(model => model.Name)
-    </dt>
 
-    <dd>
-        @Html.DisplayFor(model => model.Name)
-    </dd>
 
-    <dt>
-        @Html.DisplayNameFor(model => model.AlterEgo)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.AlterEgo)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.PrimaryAbility)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.PrimaryAbility)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.SecondaryAbility)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.SecondaryAbility)
-    </dd>
-
-    <dt>
-        @Html.DisplayNameFor(model => model.CatchPhrase)
-    </dt>
-
-    <dd>
-        @Html.DisplayFor(model => model.CatchPhrase)
-    </dd>
-
-</dl>
