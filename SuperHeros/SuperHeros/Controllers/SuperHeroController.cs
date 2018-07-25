@@ -55,19 +55,18 @@ namespace SuperHeros.Controllers
             db.SaveChanges();
             return RedirectToAction("Details");
         }
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(string name)
-        {
-            var deletedHero = db.SuperHeros.Where(s => s.Name == name).Single();
+            var deletedHero = db.SuperHeros.Where(s => s.Id == id).Single();
             return View(deletedHero);
-            //db.SuperHeros.Remove(deletedHero);
-            //db.SaveChanges();
-            //return RedirectToAction("Details");
+        }
+        public ActionResult OnDelete(int id)
+        {
+            var deletedHero = db.SuperHeros.Where(s => s.Id == id).Single();
+            db.SuperHeros.Remove(deletedHero);
+            db.SaveChanges();
+            var Heroes = db.SuperHeros.ToList();
+            return View("Details", Heroes);
         }
     }
 }

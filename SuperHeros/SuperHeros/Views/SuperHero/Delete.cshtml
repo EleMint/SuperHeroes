@@ -1,7 +1,7 @@
 ﻿@model SuperHeros.Models.SuperHeros
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "OnDelete";
 }
 
 <h2>Delete</h2>
@@ -57,9 +57,8 @@
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
 
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" />
-            <input type="submit" value="Return" class="btn btn-default" />
-        </div>
+        <p>
+            @Html.ActionLink("Delete", "OnDelete", new { Id = Model.Id} )
+        </p>
     }
 </div>
