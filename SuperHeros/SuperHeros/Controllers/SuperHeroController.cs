@@ -14,7 +14,7 @@ namespace SuperHeros.Controllers
         // GET: SuperHero
         public ActionResult Index()
         {
-            return View();
+            return View(db.SuperHeros.ToList());
         }
         public ActionResult Create()
         {
@@ -34,26 +34,29 @@ namespace SuperHeros.Controllers
             ViewBag.Name = new SelectList(db.SuperHeros, "Id", "Name", superHero.Name);
             return View(superHero);
         }
-        public ActionResult Details()
+        public ActionResult Details(int id)
         {
-            return View(db.SuperHeros.ToList());
+            var Hero = db.SuperHeros.Where(s => s.Id == id).FirstOrDefault();
+            return View(Hero);
         }
-        public ActionResult Edit()
+        public ActionResult Edit(int id)
         {
-            return View();
+            var Hero = db.SuperHeros.Where(s => s.Id == id).FirstOrDefault();
+            return View(Hero);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Models.SuperHeros superHero)
+        public ActionResult Edit(Models.SuperHeros superhero)
         {
-            var hero = db.SuperHeros.Where(s => s.Id == superHero.Id).Single();
-            hero.Name = superHero.Name;
-            hero.AlterEgo = superHero.AlterEgo;
-            hero.PrimaryAbility = superHero.PrimaryAbility;
-            hero.SecondaryAbility = superHero.SecondaryAbility;
-            hero.CatchPhrase = superHero.CatchPhrase;
+            var hero = db.SuperHeros.Where(s => s.Id == superhero.Id).FirstOrDefault();
+            hero.Name = superhero.Name;
+            hero.AlterEgo = superhero.AlterEgo;
+            hero.PrimaryAbility = superhero.PrimaryAbility;
+            hero.SecondaryAbility = superhero.SecondaryAbility;
+            hero.CatchPhrase = superhero.CatchPhrase;
             db.SaveChanges();
-            return RedirectToAction("Details");
+            var Heroes = db.SuperHeros.ToList();
+            return RedirectToAction("Index", Heroes);
         }
         public ActionResult Delete(int id)
         {
@@ -66,7 +69,7 @@ namespace SuperHeros.Controllers
             db.SuperHeros.Remove(deletedHero);
             db.SaveChanges();
             var Heroes = db.SuperHeros.ToList();
-            return View("Details", Heroes);
+            return View("Index", Heroes);
         }
     }
 }

@@ -1,23 +1,20 @@
-﻿@model IEnumerable<SuperHeros.Models.SuperHeros>
+﻿@model SuperHeros.Models.SuperHeros
 
 @{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
-
 <div>
-    <h4>SuperHeros</h4>
+    <h3>@Html.DisplayNameFor(model => model.Name)</h3>
     <hr />
-    @foreach (var superhero in Model)
-    {
         <dl class="dl-horizontal">
             <dt>
                 @Html.DisplayNameFor(model => model.Name)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => superhero.Name)
+                @Html.DisplayFor(model => Model.Name)
             </dd>
 
             <dt>
@@ -25,7 +22,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => superhero.AlterEgo)
+                @Html.DisplayFor(model => Model.AlterEgo)
             </dd>
 
             <dt>
@@ -33,7 +30,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => superhero.PrimaryAbility)
+                @Html.DisplayFor(model => Model.PrimaryAbility)
             </dd>
 
             <dt>
@@ -41,7 +38,7 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => superhero.SecondaryAbility)
+                @Html.DisplayFor(model => Model.SecondaryAbility)
             </dd>
 
             <dt>
@@ -49,19 +46,14 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => superhero.CatchPhrase)
+                @Html.DisplayFor(model => Model.CatchPhrase)
             </dd>
 
         </dl>
         <p>
-            @Html.ActionLink("Edit", "Edit", new { Id = superhero.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { Id = superhero.Id})
+            @Html.ActionLink("Back To List", "Index") |
+            @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = Model.Id })
         </p>
-    }
+    
 </div>
-
-
-
-
-
-

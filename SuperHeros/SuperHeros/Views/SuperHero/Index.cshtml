@@ -1,13 +1,77 @@
-﻿@model SuperHeros.Models.SuperHeros
+﻿@model IEnumerable<SuperHeros.Models.SuperHeros>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create", "Create") |
-    @Html.ActionLink("Edit", "Edit") |
-    @Html.ActionLink("Delete", "Delete")
-</p>
+<div>
+    <h3>SuperHeros</h3>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                @foreach (var superhero in Model)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => superhero.Name)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AlterEgo)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => superhero.AlterEgo)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.PrimaryAbility)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => superhero.PrimaryAbility)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SecondaryAbility)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => superhero.SecondaryAbility)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CatchPhrase)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => superhero.CatchPhrase)
+                        </dd>
+
+                    </dl>
+                    <p>
+                        @Html.ActionLink("Details", "Details", new { id = superhero.Id }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = superhero.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = superhero.Id })
+                    </p>
+                }
+            </div>
+        <div class="col-md">
+            <img src="https://i.imgur.com/tKbWE0P.jpg" alt="Deadpool"/>
+        </div>
+            </div>
+        </div>
+</div>
+    
+
+
+
+
+
+
